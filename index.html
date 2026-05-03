@@ -14,14 +14,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #f7f4f0;
-      --bg2:       #efebe4;
-      --ink:       #1e1c19;
-      --ink-mid:   #5c5649;
-      --ink-faint: #a89f93;
-      --accent:    #5c7a6e;
-      --accent2:   #7a6248;
-      --border:    #ddd8cf;
+      --bg:        #f2f4f7;
+      --bg2:       #e8ecf2;
+      --ink:       #0f1624;
+      --ink-mid:   #3d4e63;
+      --ink-faint: #8a9ab5;
+      --accent:    #2d6be4;
+      --accent2:   #1a4fa8;
+      --border:    #d0d8e8;
       --font:      'Space Mono', monospace;
     }
 
@@ -42,91 +42,73 @@
       display: flex;
       align-items: center;
       gap: 0;
-      padding: 18px 48px 14px;
+      padding: 16px 32px 14px;
       border-bottom: 1px solid var(--border);
       background: var(--bg);
       user-select: none;
       flex-wrap: wrap;
     }
-    .topbar-logo {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--ink);
-      letter-spacing: -0.04em;
-      margin-right: 4px;
-    }
+    .topbar-logo { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.04em; margin-right: 4px; }
     .topbar-logo span { color: var(--accent); }
-    .topbar-slash {
-      color: var(--ink-faint);
-      font-size: 15px;
-      padding: 0 6px;
-      font-weight: 400;
-    }
-    .nav-link {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--ink-faint);
-      cursor: pointer;
-      letter-spacing: 0;
-      padding: 1px 0;
-      border-bottom: 1px solid transparent;
-    }
+    .topbar-slash { color: var(--ink-faint); font-size: 15px; padding: 0 6px; font-weight: 400; }
+    .nav-link { font-size: 13px; font-weight: 400; color: var(--ink-faint); cursor: pointer; padding: 1px 0; border-bottom: 1px solid transparent; }
     .nav-link:hover { color: var(--ink); }
-    .nav-link.active {
-      color: var(--ink);
-      border-bottom-color: var(--accent);
+    .nav-link.active { color: var(--ink); border-bottom-color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .topbar { padding: 12px 16px 10px; }
+      .topbar-logo { font-size: 13px; }
+      .nav-link { font-size: 11px; }
+      .topbar-slash { padding: 0 3px; font-size: 12px; }
     }
 
-    /* ── Content ── */
-    .content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 52px 48px 72px;
-      max-width: 760px;
-    }
-    .content::-webkit-scrollbar { width: 4px; }
-    .content::-webkit-scrollbar-track { background: transparent; }
-    .content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    /* ── Content — centered on desktop ── */
+    .content-wrapper { flex: 1; overflow-y: auto; display: flex; justify-content: center; }
+    .content-wrapper::-webkit-scrollbar { width: 4px; }
+    .content-wrapper::-webkit-scrollbar-track { background: transparent; }
+    .content-wrapper::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .content { width: 100%; max-width: 720px; padding: 48px 32px 72px; }
+
+    @media (max-width: 768px) { .content { padding: 32px 20px 60px; } }
+    @media (max-width: 480px) { .content { padding: 22px 16px 48px; } }
 
     /* ── Section header ── */
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 10px;
-    }
-    .section-title {
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: -0.05em;
-      color: var(--ink);
-      line-height: 1.1;
-      margin-bottom: 32px;
+    .section-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; }
+    .section-title { font-size: 26px; font-weight: 700; letter-spacing: -0.05em; color: var(--ink); line-height: 1.1; margin-bottom: 32px; }
+
+    /* ── Tag pill ── */
+    .tag-pill {
+      display: inline-block; font-size: 9px; color: var(--accent);
+      background: rgba(45,107,228,0.08); border: 1px solid rgba(45,107,228,0.2);
+      padding: 2px 7px; border-radius: 2px; font-style: italic; white-space: nowrap; letter-spacing: 0.03em;
     }
 
-    /* ── Notes list ── */
-    .note-row {
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 4px;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
+    /* ── Tag input ── */
+    .tag-input-wrap {
+      display: flex; flex-wrap: wrap; gap: 5px; align-items: center;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 2px;
+      padding: 6px 10px; min-height: 38px;
     }
+    .tag-input-wrap:focus-within { border-color: var(--accent); }
+    .tag-input-wrap input { font-family: var(--font); font-size: 12px; color: var(--ink); background: transparent; border: none; outline: none; flex: 1; min-width: 80px; }
+    .tag-pill-rm { display: inline-flex; align-items: center; gap: 4px; font-size: 9px; color: var(--accent); background: rgba(45,107,228,0.08); border: 1px solid rgba(45,107,228,0.2); padding: 2px 6px 2px 7px; border-radius: 2px; white-space: nowrap; }
+    .tag-pill-rm button { background: none; border: none; cursor: pointer; color: var(--accent); font-size: 10px; padding: 0; line-height: 1; opacity: 0.6; }
+    .tag-pill-rm button:hover { opacity: 1; }
+
+    /* ── Notes list ── */
+    .note-row { display: flex; flex-direction: column; gap: 5px; padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
     .note-row:first-child { border-top: 1px solid var(--border); }
     .note-row:hover .note-title { color: var(--accent); }
     .note-slash { color: var(--ink-faint); font-size: 12px; flex-shrink: 0; }
     .note-title { font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
-    .note-tag   { font-size: 10px; color: var(--accent); font-style: italic; white-space: nowrap; flex-shrink: 0; }
 
     /* ── Reader ── */
     .reader { max-width: 660px; }
     .reader-back { font-size: 11px; color: var(--ink-faint); cursor: pointer; margin-bottom: 36px; display: inline-flex; align-items: center; gap: 5px; }
     .reader-back:hover { color: var(--ink-mid); }
     .reader-title { font-size: 22px; font-weight: 700; letter-spacing: -0.05em; color: var(--ink); margin-bottom: 10px; line-height: 1.25; }
-    .reader-meta  { font-size: 11px; color: var(--ink-faint); margin-bottom: 36px; display: flex; gap: 14px; align-items: center; }
+    .reader-meta  { font-size: 11px; color: var(--ink-faint); margin-bottom: 36px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
     .reader-body  { font-size: 14px; line-height: 2; color: var(--ink); }
     .reader-body p { margin-bottom: 20px; }
     .reader-body h2 { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mid); margin: 32px 0 12px; }
@@ -152,149 +134,93 @@
     .proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
     .proj-chip  { font-size: 10px; color: var(--ink-faint); background: var(--bg2); padding: 2px 7px; border-radius: 2px; cursor: pointer; border: 1px solid transparent; }
     .proj-status { font-size: 10px; color: var(--accent); white-space: nowrap; }
-    .proj-wip    { font-size: 10px; color: var(--accent2); white-space: nowrap; }
+    .proj-wip    { font-size: 10px; color: var(--ink-faint); white-space: nowrap; }
+
+    @media (max-width: 480px) { .proj-card { grid-template-columns: 1fr; } }
 
     /* ── Game ── */
-    .game-btn { font-size: 12px; font-weight: 700; color: var(--bg); background: var(--accent); border: none; padding: 9px 22px; border-radius: 2px; cursor: pointer; font-family: var(--font); }
+    .game-btn { font-size: 12px; font-weight: 700; color: #fff; background: var(--accent); border: none; padding: 10px 24px; border-radius: 2px; cursor: pointer; font-family: var(--font); letter-spacing: 0.04em; }
     .game-btn:hover { background: var(--accent2); }
 
     /* ── Editor ── */
-    .editor { max-width: 620px; display: flex; flex-direction: column; gap: 16px; }
     .ed-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 5px; }
-    .ed-input {
-      font-family: var(--font); font-size: 13px; color: var(--ink);
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 2px;
-      padding: 9px 12px; outline: none; width: 100%;
-    }
+    .ed-input { font-family: var(--font); font-size: 13px; color: var(--ink); background: var(--bg2); border: 1px solid var(--border); border-radius: 2px; padding: 9px 12px; outline: none; width: 100%; }
     .ed-input:focus { border-color: var(--accent); }
-    .ed-textarea {
-      font-family: var(--font); font-size: 13px; color: var(--ink);
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 2px;
-      padding: 12px; outline: none; width: 100%; resize: vertical; line-height: 1.9; min-height: 200px;
-    }
-    .ed-textarea:focus { border-color: var(--accent); }
-    .ed-drop {
-      border: 1px dashed var(--border); border-radius: 2px; background: var(--bg2);
-      padding: 24px; text-align: center; cursor: pointer;
-      font-size: 11px; color: var(--ink-faint);
-    }
-    .ed-drop:hover, .ed-drop.over { border-color: var(--accent); color: var(--ink-mid); }
     .ed-actions { display: flex; gap: 12px; align-items: center; }
-    .btn-p { font-family: var(--font); font-size: 12px; font-weight: 700; color: var(--bg); background: var(--accent); border: none; padding: 9px 20px; border-radius: 2px; cursor: pointer; }
+    .btn-p { font-family: var(--font); font-size: 12px; font-weight: 700; color: #fff; background: var(--accent); border: none; padding: 9px 20px; border-radius: 2px; cursor: pointer; }
     .btn-p:hover { background: var(--accent2); }
     .btn-g { font-family: var(--font); font-size: 12px; color: var(--ink-faint); background: transparent; border: none; padding: 9px 0; cursor: pointer; }
     .btn-g:hover { color: var(--ink-mid); }
-
     .proj-add-btn { font-family: var(--font); font-size: 11px; color: var(--ink-faint); background: transparent; border: 1px solid var(--border); padding: 5px 12px; border-radius: 2px; cursor: pointer; }
     .proj-add-btn:hover { border-color: var(--accent); color: var(--accent); }
     .proj-editor-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 20px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .free-editor[data-placeholder]:empty:before { content: attr(data-placeholder); color: var(--ink-faint); pointer-events: none; position: absolute; }
 
-    /* ── Free editor placeholder ── */
-    .free-editor[data-placeholder]:empty:before {
-      content: attr(data-placeholder);
-      color: var(--ink-faint);
-      pointer-events: none;
-      position: absolute;
-    }
-
-    /* ── Dark mode ── */
-    body.dark-mode { background: #0b0d12; }
-    body.dark-mode .topbar { background: #0b0d12; border-bottom-color: #1e2535; }
-    body.dark-mode .section-title { color: #eef3f8; text-shadow: 0 0 40px rgba(100,160,220,0.12); }
-    body.dark-mode .reader-title { color: #eef3f8; text-shadow: 0 0 40px rgba(100,160,220,0.12); }
-    body.dark-mode .topbar-logo { color: #dde6f0; }
-    body.dark-mode .nav-link { color: #4a6a85; }
-    body.dark-mode .nav-link:hover { color: #dde6f0; }
-    body.dark-mode .nav-link.active { color: #a8c8e8; border-bottom-color: #5c9abf; }
-    body.dark-mode .note-row:hover .note-title { color: #a8c8e8; }
-    body.dark-mode .proj-name { color: #dde6f0; }
-    body.dark-mode .ed-input,
-    body.dark-mode .ed-textarea,
-    body.dark-mode select.ed-input { background: #111520; border-color: #1e2535; color: #dde6f0; }
-    body.dark-mode .ed-input:focus,
-    body.dark-mode .ed-textarea:focus { border-color: #5c9abf; }
-    body.dark-mode .free-editor { color: #dde6f0; }
-    body.dark-mode .game-btn { background: #2a4a6b; color: #c8dff0; }
-    body.dark-mode .game-btn:hover { background: #3a5f85; }
-    body.dark-mode .btn-p { background: #2a4a6b; color: #c8dff0; }
-    body.dark-mode .btn-p:hover { background: #3a5f85; }
-    body.dark-mode .note-tag { background: #111520; color: #4a6a85; }
-    body.dark-mode .me-tag { border-color: #1e2535; color: #7a9ab5; }
-    body.dark-mode .proj-chip { background: #111520; }
-    body.dark-mode .proj-editor-box,
-    body.dark-mode .ed-drop { background: #111520; border-color: #1e2535; }
-    body.dark-mode .reader-meta span:last-child { color: #5c9abf; text-shadow: 0 0 20px rgba(92,154,191,0.3); }
-    body.dark-mode .section-label { color: #2e3d52; }
+    /* ── Dark mode — cool deep navy ── */
+    body.dark-mode { background: #070b14; }
+    body.dark-mode .topbar { background: #070b14; border-bottom-color: #111928; }
+    body.dark-mode .content-wrapper { background: #070b14; }
+    body.dark-mode .section-title { color: #d8e8ff; }
+    body.dark-mode .reader-title { color: #d8e8ff; }
+    body.dark-mode .topbar-logo { color: #c0d4f8; }
+    body.dark-mode .nav-link { color: #2e4468; }
+    body.dark-mode .nav-link:hover { color: #c0d4f8; }
+    body.dark-mode .nav-link.active { color: #6ea4f0; border-bottom-color: #3a70d8; }
+    body.dark-mode .note-title { color: #c0d4f8; }
+    body.dark-mode .note-row:hover .note-title { color: #6ea4f0; }
+    body.dark-mode .note-slash { color: #2e4468; }
+    body.dark-mode .proj-name { color: #c0d4f8; }
+    body.dark-mode .proj-slash { color: #2e4468; }
+    body.dark-mode .proj-desc { color: #3d5880; }
+    body.dark-mode .ed-input, body.dark-mode select.ed-input { background: #0c1220; border-color: #111928; color: #c0d4f8; }
+    body.dark-mode .ed-input:focus { border-color: #3a70d8; }
+    body.dark-mode .free-editor { color: #c0d4f8; }
+    body.dark-mode .tag-pill { background: rgba(110,164,240,0.08); border-color: rgba(110,164,240,0.18); color: #6ea4f0; }
+    body.dark-mode .tag-pill-rm { background: rgba(110,164,240,0.08); border-color: rgba(110,164,240,0.18); color: #6ea4f0; }
+    body.dark-mode .tag-input-wrap { background: #0c1220; border-color: #111928; }
+    body.dark-mode .tag-input-wrap input { color: #c0d4f8; }
+    body.dark-mode .tag-input-wrap:focus-within { border-color: #3a70d8; }
+    body.dark-mode .me-tag { border-color: #111928; color: #3d5880; }
+    body.dark-mode .me-intro { color: #8aaccf; }
+    body.dark-mode .me-link { color: #3d5880; }
+    body.dark-mode .me-link:hover { color: #6ea4f0; }
+    body.dark-mode .proj-chip { background: #0c1220; }
+    body.dark-mode .proj-editor-box { background: #0c1220; border-color: #111928; }
+    body.dark-mode .section-label { color: #1c2e48; }
+    body.dark-mode .reader-meta span { color: #2e4468; }
+    body.dark-mode .reader-body { color: #8aaccf; }
+    body.dark-mode .game-btn { background: #1a3870; color: #90c0f8; }
+    body.dark-mode .game-btn:hover { background: #224898; }
+    body.dark-mode .btn-p { background: #1a3870; color: #90c0f8; }
+    body.dark-mode .btn-p:hover { background: #224898; }
 
     /* ── Tweaks panel ── */
-    .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
-      max-height:calc(100vh - 32px);display:flex;flex-direction:column;
-      background:rgba(250,249,247,.92);color:#29261b;
-      -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
-      border:.5px solid rgba(255,255,255,.6);border-radius:14px;
-      box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
-      font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
-    .twk-hd{display:flex;align-items:center;justify-content:space-between;
-      padding:10px 8px 10px 14px;cursor:move;user-select:none}
-    .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
-    .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
-      width:22px;height:22px;border-radius:6px;cursor:pointer;font-size:13px;line-height:1}
-    .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
-    .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
-      overflow-y:auto;overflow-x:hidden;min-height:0;
-      scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+    .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:260px;max-height:calc(100vh - 32px);display:flex;flex-direction:column;background:rgba(242,244,247,.94);color:#0f1624;-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);border:.5px solid rgba(255,255,255,.7);border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 12px 40px rgba(15,22,36,.14);font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+    .twk-hd{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;cursor:move;user-select:none}
+    .twk-hd b{font-size:12px;font-weight:600}
+    .twk-x{appearance:none;border:0;background:transparent;color:rgba(15,22,36,.5);width:22px;height:22px;border-radius:6px;cursor:pointer;font-size:13px;line-height:1}
+    .twk-x:hover{background:rgba(0,0,0,.06);color:#0f1624}
+    .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;min-height:0}
     .twk-row{display:flex;flex-direction:column;gap:5px}
     .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
-    .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;color:rgba(41,38,27,.72)}
+    .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;color:rgba(15,22,36,.7)}
     .twk-lbl>span:first-child{font-weight:500}
-    .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
-    .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-      color:rgba(41,38,27,.45);padding:10px 0 0}
+    .twk-val{color:rgba(15,22,36,.5);font-variant-numeric:tabular-nums}
+    .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(15,22,36,.4);padding:10px 0 0}
     .twk-sect:first-child{padding-top:0}
-    .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
-      border-radius:999px;background:rgba(0,0,0,.12);outline:none}
-    .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
-      width:14px;height:14px;border-radius:50%;background:#fff;
-      border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:pointer}
-    .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
-      background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:pointer}
-    .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
-      background:rgba(0,0,0,.06);user-select:none}
-    .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
-      background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
-      transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
-    .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
-      background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
-      border-radius:6px;cursor:pointer;padding:4px 6px;line-height:1.2}
-    .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
-      background:rgba(0,0,0,.15);transition:background .15s;cursor:pointer;padding:0}
-    .twk-toggle[data-on="1"]{background:#34c759}
-    .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
-      background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+    .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+    .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:pointer}
+    .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:pointer}
+    .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;background:rgba(0,0,0,.15);transition:background .15s;cursor:pointer;padding:0}
+    .twk-toggle[data-on="1"]{background:#2d6be4}
+    .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
     .twk-toggle[data-on="1"] i{transform:translateX(14px)}
-    .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
-      border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:pointer;
-      background:transparent;flex-shrink:0}
+    .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:pointer;background:transparent;flex-shrink:0}
     .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
     .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
-    .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
 
-    /* ── Edit unlock badge ── */
-    .edit-badge {
-      position: fixed;
-      bottom: 16px;
-      left: 16px;
-      font-family: var(--font);
-      font-size: 9px;
-      color: var(--accent);
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      padding: 3px 8px;
-      border-radius: 2px;
-      opacity: 0.6;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+    /* ── Edit badge ── */
+    .edit-badge { position:fixed; bottom:16px; left:16px; font-family:var(--font); font-size:9px; color:var(--accent); background:var(--bg2); border:1px solid var(--border); padding:3px 8px; border-radius:2px; opacity:0.6; letter-spacing:0.08em; text-transform:uppercase; }
   </style>
 </head>
 <body>
@@ -302,44 +228,52 @@
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback } = React;
 
-// ── Storage ───────────────────────────────────────────────────────────────────
-const SK_NOTES  = "palash_notes_v2";
-const SK_PROJS  = "palash_projs_v2";
-const SK_TWEAKS = "palash_tweaks_v1";
+const SK_NOTES  = "palash_notes_v3";
+const SK_PROJS  = "palash_projs_v3";
+const SK_TWEAKS = "palash_tweaks_v2";
 
 const load = (k, def) => { try { const s = localStorage.getItem(k); return s ? JSON.parse(s) : def; } catch { return def; } };
-const save = (k, v)   => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
 
-// ── Edit-mode auth ────────────────────────────────────────────────────────────
-// Change this to whatever password you want. It's client-side so not
-// cryptographically secret, but it stops casual visitors from editing.
 const EDITOR_PASSWORD = "Piyushuma@2009";
-
 const isEditUnlocked = () => sessionStorage.getItem("palash_edit") === "1";
-const unlockEdit     = () => sessionStorage.setItem("palash_edit", "1");
+const unlockEdit = () => sessionStorage.setItem("palash_edit", "1");
 
-// ── Default content ───────────────────────────────────────────────────────────
+// ── Tag input ─────────────────────────────────────────────────────────────────
+function TagInput({ tags, onChange, placeholder = "add tag · enter" }) {
+  const [input, setInput] = useState("");
+  const add = val => { const t = val.trim().toLowerCase(); if (t && !tags.includes(t)) onChange([...tags, t]); setInput(""); };
+  const rm = t => onChange(tags.filter(x => x !== t));
+  return (
+    <div className="tag-input-wrap">
+      {tags.map(t => (
+        <span key={t} className="tag-pill-rm">{t}<button onClick={() => rm(t)}>✕</button></span>
+      ))}
+      <input value={input} onChange={e => setInput(e.target.value)}
+        onKeyDown={e => {
+          if (e.key === "Enter" || e.key === ",") { e.preventDefault(); add(input); }
+          if (e.key === "Backspace" && !input && tags.length) rm(tags[tags.length - 1]);
+        }}
+        onBlur={() => { if (input.trim()) add(input); }}
+        placeholder={tags.length === 0 ? placeholder : ""} />
+    </div>
+  );
+}
+
+// ── Default data ──────────────────────────────────────────────────────────────
 const defaultNotes = [
-  { id: 1, date: "2026-04-28", title: "on not knowing things — and why that's fine", tag: "thought", html: null, body: "There's this weird pressure in the research world to always have an answer ready. Someone asks about your work and you're expected to give a crisp three-sentence summary with clear implications.\n\nBut most of the time, honest research is not knowing things. You poke at a problem from five angles, three of them don't work, one is promising but half-broken, and the last one you haven't tried yet because you're scared it won't work either.\n\nI've been thinking about this more since my last database rabbit hole. I went in to understand a simple query planner behavior and ended up three hours deep in the internals of B-tree page splits. Unplanned. It happens every time.\n\nI think the not-knowing is the point. The detour is the thing." },
-  { id: 2, date: "2026-04-11", title: "vector embeddings are just vibes, actually",       tag: "ml",       html: null, body: "People act like embeddings are arcane magic. They're not. They're just the model's compressed opinion of what something means, squished into a few hundred numbers.\n\nThe trick is that two semantically similar things end up close together in that space — not because we told it so, but because the training objective forced the model to cluster them that way.\n\nOnce you accept that embeddings are basically vibes-as-numbers, a lot of their failure modes start making sense. Garbage in, garbage out — but the garbage is subtle." },
-  { id: 3, date: "2026-03-22", title: "databases as a thinking tool",                      tag: "databases", html: null, body: "The more I use SQL as an exploratory tool — not just for production queries — the more I think it's one of the most underrated ways to think about data.\n\nThere's something about forcing yourself to express a question as a relational operation that clarifies the question itself. You can't ask a fuzzy question in SQL. You have to be precise.\n\nWindow functions in particular feel like a superpower. The first time you really understand PARTITION BY, something shifts. You stop thinking in loops and start thinking in sets." },
-  { id: 4, date: "2026-02-14", title: "research is mostly waiting, poorly",                tag: "research",  html: null, body: "A disproportionate chunk of research time is just waiting. Waiting for runs to finish. Waiting for reviews. Waiting for yourself to have the right idea.\n\nThe productive version of waiting is when you use that slack to read tangentially, to wander. The unproductive version is doomscrolling and convincing yourself it's procrastination with benefits.\n\nI haven't solved this. But I've noticed that the best ideas usually come during the wandering, not the focused work. So maybe the waiting is load-bearing." },
+  { id: 1, date: "2026-04-28", title: "on not knowing things — and why that's fine", tags: ["thought","research"], html: null, body: "There's this weird pressure in the research world to always have an answer ready. Someone asks about your work and you're expected to give a crisp three-sentence summary with clear implications.\n\nBut most of the time, honest research is not knowing things. You poke at a problem from five angles, three of them don't work, one is promising but half-broken, and the last one you haven't tried yet because you're scared it won't work either.\n\nI've been thinking about this more since my last database rabbit hole. I went in to understand a simple query planner behavior and ended up three hours deep in the internals of B-tree page splits. Unplanned. It happens every time.\n\nI think the not-knowing is the point. The detour is the thing." },
+  { id: 2, date: "2026-04-11", title: "vector embeddings are just vibes, actually", tags: ["ml","thought"], html: null, body: "People act like embeddings are arcane magic. They're not. They're just the model's compressed opinion of what something means, squished into a few hundred numbers.\n\nThe trick is that two semantically similar things end up close together in that space — not because we told it so, but because the training objective forced the model to cluster them that way.\n\nOnce you accept that embeddings are basically vibes-as-numbers, a lot of their failure modes start making sense. Garbage in, garbage out — but the garbage is subtle." },
+  { id: 3, date: "2026-03-22", title: "databases as a thinking tool", tags: ["databases"], html: null, body: "The more I use SQL as an exploratory tool — not just for production queries — the more I think it's one of the most underrated ways to think about data.\n\nThere's something about forcing yourself to express a question as a relational operation that clarifies the question itself. You can't ask a fuzzy question in SQL. You have to be precise.\n\nWindow functions in particular feel like a superpower. The first time you really understand PARTITION BY, something shifts. You stop thinking in loops and start thinking in sets." },
+  { id: 4, date: "2026-02-14", title: "research is mostly waiting, poorly", tags: ["research"], html: null, body: "A disproportionate chunk of research time is just waiting. Waiting for runs to finish. Waiting for reviews. Waiting for yourself to have the right idea.\n\nThe productive version of waiting is when you use that slack to read tangentially, to wander. The unproductive version is doomscrolling and convincing yourself it's procrastination with benefits.\n\nI haven't solved this. But I've noticed that the best ideas usually come during the wandering, not the focused work. So maybe the waiting is load-bearing." },
 ];
 
 const defaultProjs = [
-  { id: 1, name: "mystuff",     desc: "The note-taking backend behind this blog. Write, attach images, publish. Nothing more.", stack: ["go","sqlite","htmx"],         status: "live", link: "" },
-  { id: 2, name: "tiny-vec",    desc: "A minimal vector similarity search from scratch. No libraries, just the math.",          stack: ["python","numpy"],             status: "wip",  link: "" },
+  { id: 1, name: "mystuff",     desc: "The note-taking backend behind this blog. Write, attach images, publish. Nothing more.", stack: ["go","sqlite","htmx"],           status: "live", link: "" },
+  { id: 2, name: "tiny-vec",    desc: "A minimal vector similarity search from scratch. No libraries, just the math.",          stack: ["python","numpy","ml"],          status: "wip",  link: "" },
   { id: 3, name: "query-trace", desc: "A visual query plan explorer for PostgreSQL. Drag nodes, inspect cost estimates.",       stack: ["typescript","react","postgres"], status: "wip",  link: "" },
-  { id: 4, name: "readinglist", desc: "A dead-simple reading list. Drop a link, add a one-liner. Just chronological.",         stack: ["sqlite","go"],               status: "live", link: "" },
+  { id: 4, name: "readinglist", desc: "A dead-simple reading list. Drop a link, add a one-liner. Just chronological.",         stack: ["sqlite","go"],                  status: "live", link: "" },
 ];
-
-// ── Word game ─────────────────────────────────────────────────────────────────
-const WORDS = {
-  easy:   ["cat","dog","run","jump","fast","slow","big","red","cold","hot","tree","door","book","fire","rain","lake","wind","soft","hard","blue"],
-  medium: ["river","plant","storm","brain","flash","ghost","sharp","quiet","blend","track","index","query","batch","stack","merge","cache","pivot","chunk","scope","bloom"],
-  hard:   ["abstract","fragment","volatile","mutable","dispatch","iterator","callback","overflow","gradient","recursive","threshold","latency","pipeline","topology","inference"],
-};
-const pickWord = s => { const bank = s < 5 ? WORDS.easy : s < 12 ? WORDS.medium : WORDS.hard; return bank[Math.floor(Math.random() * bank.length)]; };
 
 // ── Image resize helper ───────────────────────────────────────────────────────
 function makeResizeHandler(el) {
@@ -360,13 +294,11 @@ function makeResizeHandler(el) {
         btn.onclick = ev => { ev.stopPropagation(); img.style.width = w; img.style.maxWidth = "100%"; removeToolbar(); };
         toolbar.appendChild(btn);
       });
-      const rect = img.getBoundingClientRect();
-      const edRect = el.getBoundingClientRect();
+      const rect = img.getBoundingClientRect(); const edRect = el.getBoundingClientRect();
       toolbar.style.position = "absolute";
       toolbar.style.top  = (rect.top  - edRect.top  + el.scrollTop  - 36) + "px";
       toolbar.style.left = (rect.left - edRect.left) + "px";
-      el.style.position = "relative";
-      el.appendChild(toolbar);
+      el.style.position = "relative"; el.appendChild(toolbar);
     } else { removeToolbar(); }
   };
   el.addEventListener("click", onClick);
@@ -375,35 +307,33 @@ function makeResizeHandler(el) {
 
 // ── NotesSection ──────────────────────────────────────────────────────────────
 function NotesSection({ canEdit }) {
-  const [notes, setNotes]         = useState(() => load(SK_NOTES, defaultNotes));
+  const [notes, setNotes] = useState(() => {
+    const d = load(SK_NOTES, null);
+    if (!d) return defaultNotes;
+    return d.map(n => ({ ...n, tags: n.tags || (n.tag ? [n.tag] : ["note"]) }));
+  });
   const [view, setView]           = useState("list");
   const [openId, setOpenId]       = useState(null);
   const [editingId, setEditId]    = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setMTitle]   = useState("");
-  const [modalTag, setMTag]       = useState("");
+  const [modalTags, setMTags]     = useState([]);
+  const [filterTag, setFilterTag] = useState(null);
   const editorRef                 = useRef(null);
   const titleInputRef             = useRef(null);
-  const cleanupResizeRef          = useRef(null);
+  const cleanupRef                = useRef(null);
 
-  const editorRefCallback = useCallback(el => {
-    if (cleanupResizeRef.current) { cleanupResizeRef.current(); cleanupResizeRef.current = null; }
+  const editorRefCb = useCallback(el => {
+    if (cleanupRef.current) { cleanupRef.current(); cleanupRef.current = null; }
     editorRef.current = el;
-    if (el) cleanupResizeRef.current = makeResizeHandler(el);
+    if (el) cleanupRef.current = makeResizeHandler(el);
   }, []);
 
   const persist = n => { setNotes(n); save(SK_NOTES, n); };
   const goList  = () => { setView("list"); setOpenId(null); setEditId(null); setShowModal(false); };
-
-  const goWrite = () => {
-    setEditId(null);
-    setView("write");
-    setTimeout(() => { if (editorRef.current) editorRef.current.innerHTML = ""; }, 0);
-  };
-
-  const goEdit = note => {
-    setEditId(note.id);
-    setView("write");
+  const goWrite = () => { setEditId(null); setView("write"); setTimeout(() => { if (editorRef.current) editorRef.current.innerHTML = ""; }, 0); };
+  const goEdit  = note => {
+    setEditId(note.id); setView("write");
     setTimeout(() => {
       if (editorRef.current)
         editorRef.current.innerHTML = note.html || (note.body ? note.body.split(/\n\n+/).map(p => `<p>${p}</p>`).join("") : "");
@@ -414,10 +344,9 @@ function NotesSection({ canEdit }) {
     const html = editorRef.current ? editorRef.current.innerHTML.trim() : "";
     if (!html) return;
     if (editingId) {
-      const existing = notes.find(n => n.id === editingId);
-      setMTitle(existing ? existing.title : "");
-      setMTag(existing ? existing.tag : "");
-    } else { setMTitle(""); setMTag(""); }
+      const ex = notes.find(n => n.id === editingId);
+      setMTitle(ex ? ex.title : ""); setMTags(ex ? (ex.tags || []) : []);
+    } else { setMTitle(""); setMTags([]); }
     setShowModal(true);
     setTimeout(() => { if (titleInputRef.current) titleInputRef.current.focus(); }, 50);
   };
@@ -425,13 +354,13 @@ function NotesSection({ canEdit }) {
   const confirmPublish = () => {
     if (!modalTitle.trim()) return;
     const html = editorRef.current ? editorRef.current.innerHTML : "";
+    const finalTags = modalTags.length ? modalTags : ["note"];
     if (editingId) {
-      persist(notes.map(n => n.id === editingId ? { ...n, title: modalTitle.trim(), tag: modalTag.trim() || "note", html } : n));
+      persist(notes.map(n => n.id === editingId ? { ...n, title: modalTitle.trim(), tags: finalTags, html } : n));
       setOpenId(editingId);
     } else {
-      const n = { id: Date.now(), date: new Date().toISOString().slice(0, 10), title: modalTitle.trim(), tag: modalTag.trim() || "note", html };
-      persist([n, ...notes]);
-      setOpenId(n.id);
+      const n = { id: Date.now(), date: new Date().toISOString().slice(0, 10), title: modalTitle.trim(), tags: finalTags, html };
+      persist([n, ...notes]); setOpenId(n.id);
     }
     setShowModal(false); setEditId(null); setView("read");
   };
@@ -447,65 +376,51 @@ function NotesSection({ canEdit }) {
       img.style.cssText = "width:100%;max-width:100%;border-radius:3px;margin:14px 0;display:block;border:1px solid var(--border);cursor:pointer;";
       const sel = window.getSelection();
       if (sel && sel.rangeCount && editorRef.current && editorRef.current.contains(sel.getRangeAt(0).commonAncestorContainer)) {
-        const range = sel.getRangeAt(0);
-        range.deleteContents(); range.insertNode(img);
-        range.setStartAfter(img); range.collapse(true);
-        sel.removeAllRanges(); sel.addRange(range);
+        const range = sel.getRangeAt(0); range.deleteContents(); range.insertNode(img);
+        range.setStartAfter(img); range.collapse(true); sel.removeAllRanges(); sel.addRange(range);
       } else if (editorRef.current) { editorRef.current.appendChild(img); }
     };
     reader.readAsDataURL(file);
   };
 
-  // ── Write view ──
+  const allTags = [...new Set(notes.flatMap(n => n.tags))].sort();
+  const filtered = filterTag ? notes.filter(n => n.tags.includes(filterTag)) : notes;
+
+  // Write view
   if (view === "write") return (
     <div style={{ position: "relative" }}>
       <div className="section-label">01 / writings</div>
       <div className="section-title" style={{ marginBottom: 16 }}>{editingId ? "editing" : "write"}</div>
-
       {showModal && (
-        <div style={{ position: "fixed", inset: 0, background: "rgba(30,28,25,0.5)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center" }}
+        <div style={{ position:"fixed",inset:0,background:"rgba(7,11,20,0.65)",zIndex:200,display:"flex",alignItems:"center",justifyContent:"center" }}
           onClick={e => { if (e.target === e.currentTarget) setShowModal(false); }}>
-          <div style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 4, padding: "32px 36px", width: 380, display: "flex", flexDirection: "column", gap: 16 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: "-0.03em", color: "var(--ink)", marginBottom: 4 }}>before you publish</div>
+          <div style={{ background:"var(--bg)",border:"1px solid var(--border)",borderRadius:4,padding:"32px 36px",width:380,display:"flex",flexDirection:"column",gap:16 }}>
+            <div style={{ fontSize:13,fontWeight:700,letterSpacing:"-0.03em",color:"var(--ink)",marginBottom:4 }}>before you publish</div>
             <div>
               <div className="ed-label">title</div>
               <input ref={titleInputRef} className="ed-input" value={modalTitle} onChange={e => setMTitle(e.target.value)}
                 onKeyDown={e => { if (e.key === "Enter") confirmPublish(); }}
-                placeholder="give it a name" style={{ fontSize: 14, fontWeight: 700 }} autoFocus />
+                placeholder="give it a name" style={{ fontSize:14,fontWeight:700 }} autoFocus />
             </div>
             <div>
-              <div className="ed-label">tag</div>
-              <input className="ed-input" value={modalTag} onChange={e => setMTag(e.target.value)}
-                onKeyDown={e => { if (e.key === "Enter") confirmPublish(); }}
-                placeholder="ml / databases / thought…" style={{ maxWidth: 220, fontSize: 12 }} />
+              <div className="ed-label">tags (press enter)</div>
+              <TagInput tags={modalTags} onChange={setMTags} placeholder="ml · databases · thought…" />
             </div>
-            <div className="ed-actions" style={{ paddingTop: 4 }}>
+            <div className="ed-actions" style={{ paddingTop:4 }}>
               <button className="btn-p" onClick={confirmPublish}>{editingId ? "save" : "publish"}</button>
               <button className="btn-g" onClick={() => setShowModal(false)}>cancel</button>
             </div>
           </div>
         </div>
       )}
-
-      <div style={{ maxWidth: 680 }}>
-        <div
-          ref={editorRefCallback}
-          className="free-editor"
-          contentEditable
-          suppressContentEditableWarning
-          data-placeholder="write freely. paste or drop images anywhere in the text."
-          onPaste={e => {
-            const items = e.clipboardData && e.clipboardData.items;
-            if (!items) return;
-            for (const item of items) {
-              if (item.type.startsWith("image/")) { e.preventDefault(); insertImage(item.getAsFile()); return; }
-            }
-          }}
+      <div style={{ maxWidth:680 }}>
+        <div ref={editorRefCb} className="free-editor" contentEditable suppressContentEditableWarning
+          data-placeholder="write freely. paste or drop images anywhere."
+          onPaste={e => { const items = e.clipboardData && e.clipboardData.items; if (!items) return; for (const item of items) { if (item.type.startsWith("image/")) { e.preventDefault(); insertImage(item.getAsFile()); return; } } }}
           onDrop={e => { e.preventDefault(); insertImage(e.dataTransfer.files[0]); }}
           onDragOver={e => e.preventDefault()}
-          style={{ minHeight: 400, outline: "none", fontSize: 13, lineHeight: 2.1, color: "var(--ink)", caretColor: "var(--accent)", wordBreak: "break-word", position: "relative" }}
-        />
-        <div className="ed-actions" style={{ borderTop: "1px solid var(--border)", paddingTop: 16, marginTop: 16 }}>
+          style={{ minHeight:400,outline:"none",fontSize:13,lineHeight:2.1,color:"var(--ink)",caretColor:"var(--accent)",wordBreak:"break-word",position:"relative" }} />
+        <div className="ed-actions" style={{ borderTop:"1px solid var(--border)",paddingTop:16,marginTop:16 }}>
           <button className="btn-p" onClick={onPublishClick}>{editingId ? "save…" : "publish…"}</button>
           <button className="btn-g" onClick={goList}>cancel</button>
         </div>
@@ -513,58 +428,67 @@ function NotesSection({ canEdit }) {
     </div>
   );
 
-  // ── Read view ──
+  // Read view
   if (view === "read") {
     const note = notes.find(n => n.id === openId);
     if (!note) { goList(); return null; }
     return (
       <div className="reader">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 36 }}>
+        <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:36 }}>
           <span className="reader-back" onClick={goList}>← notes</span>
           {canEdit && (
-            <div style={{ display: "flex", gap: 14 }}>
-              <button onClick={() => goEdit(note)} style={{ fontFamily: "var(--font)", fontSize: 10, color: "var(--accent)", background: "transparent", border: "none", cursor: "pointer" }}>edit</button>
-              <button onClick={() => del(note.id)} style={{ fontFamily: "var(--font)", fontSize: 10, color: "var(--ink-faint)", background: "transparent", border: "none", cursor: "pointer" }}>delete</button>
+            <div style={{ display:"flex",gap:14 }}>
+              <button onClick={() => goEdit(note)} style={{ fontFamily:"var(--font)",fontSize:10,color:"var(--accent)",background:"transparent",border:"none",cursor:"pointer" }}>edit</button>
+              <button onClick={() => del(note.id)} style={{ fontFamily:"var(--font)",fontSize:10,color:"var(--ink-faint)",background:"transparent",border:"none",cursor:"pointer" }}>delete</button>
             </div>
           )}
         </div>
         <div className="reader-title">{note.title}</div>
         <div className="reader-meta">
           <span>{note.date}</span>
-          <span style={{ color: "var(--border)" }}>/</span>
-          <span style={{ color: "var(--accent)", fontStyle: "italic" }}>({note.tag})</span>
+          <span style={{ color:"var(--border)" }}>/</span>
+          <span style={{ display:"flex",gap:4,flexWrap:"wrap" }}>
+            {(note.tags || []).map(t => <span key={t} className="tag-pill">{t}</span>)}
+          </span>
         </div>
         {note.html
           ? <div className="reader-body" dangerouslySetInnerHTML={{ __html: note.html }} />
-          : note.body
-            ? <div className="reader-body">{note.body.split(/\n\n+/).filter(Boolean).map((p, i) => <p key={i}>{p}</p>)}</div>
-            : null
-        }
+          : note.body ? <div className="reader-body">{note.body.split(/\n\n+/).filter(Boolean).map((p,i) => <p key={i}>{p}</p>)}</div> : null}
       </div>
     );
   }
 
-  // ── List view ──
+  // List view
   return (
     <div>
       <div className="section-label">01 / writings</div>
-      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 32 }}>
-        <div className="section-title" style={{ marginBottom: 0 }}>my_notes</div>
-        {canEdit && (
-          <button onClick={goWrite} style={{ fontFamily: "var(--font)", fontSize: 11, color: "var(--accent)", background: "transparent", border: "1px solid var(--accent)", padding: "5px 12px", borderRadius: 2, cursor: "pointer" }}>+ write</button>
-        )}
+      <div style={{ display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:20 }}>
+        <div className="section-title" style={{ marginBottom:0 }}>my_notes</div>
+        {canEdit && <button onClick={goWrite} style={{ fontFamily:"var(--font)",fontSize:11,color:"var(--accent)",background:"transparent",border:"1px solid var(--accent)",padding:"5px 12px",borderRadius:2,cursor:"pointer" }}>+ write</button>}
       </div>
+      {allTags.length > 0 && (
+        <div style={{ display:"flex",flexWrap:"wrap",gap:5,marginBottom:20 }}>
+          {allTags.map(t => (
+            <button key={t} onClick={() => setFilterTag(filterTag === t ? null : t)}
+              style={{ fontFamily:"var(--font)",fontSize:10,padding:"3px 10px",borderRadius:2,
+                border:`1px solid ${filterTag===t?"var(--accent)":"var(--border)"}`,
+                background:filterTag===t?"rgba(45,107,228,0.08)":"transparent",
+                color:filterTag===t?"var(--accent)":"var(--ink-faint)",cursor:"pointer" }}>{t}</button>
+          ))}
+          {filterTag && <button onClick={() => setFilterTag(null)} style={{ fontFamily:"var(--font)",fontSize:10,padding:"3px 10px",border:"none",background:"transparent",color:"var(--ink-faint)",cursor:"pointer",textDecoration:"underline" }}>clear</button>}
+        </div>
+      )}
       <div>
-        {notes.map(n => (
+        {filtered.map(n => (
           <div key={n.id} className="note-row" onClick={() => { setOpenId(n.id); setView("read"); }}>
-            <div style={{ display: "flex", alignItems: "baseline", gap: 10, width: "100%" }}>
+            <div style={{ display:"flex",alignItems:"baseline",gap:10,width:"100%" }}>
               <span className="note-slash">/</span>
               <span className="note-title">{n.title}</span>
             </div>
-            <div style={{ paddingLeft: 18, display: "flex", gap: 8, fontSize: 11, color: "var(--ink-faint)" }}>
+            <div style={{ paddingLeft:18,display:"flex",gap:8,fontSize:11,color:"var(--ink-faint)",flexWrap:"wrap",alignItems:"center" }}>
               <span>{n.date}</span>
-              <span style={{ color: "var(--border)" }}>·</span>
-              <span className="note-tag">({n.tag})</span>
+              <span style={{ color:"var(--border)" }}>·</span>
+              <span style={{ display:"flex",gap:4 }}>{(n.tags||[]).map(t => <span key={t} className="tag-pill">{t}</span>)}</span>
             </div>
           </div>
         ))}
@@ -576,29 +500,17 @@ function NotesSection({ canEdit }) {
 // ── MeSection ─────────────────────────────────────────────────────────────────
 function MeSection() {
   return (
-    <div style={{ maxWidth: 540 }}>
+    <div style={{ maxWidth:540 }}>
       <div className="section-label">02 / about</div>
       <div className="section-title">me</div>
-      <div style={{ marginBottom: 28 }}>
-        <img src="https://picsum.photos/seed/palash42/320/320" alt=""
-          style={{ width: 88, height: 88, borderRadius: "50%", objectFit: "cover", border: "2px solid var(--border)", display: "block" }} />
+      <div style={{ marginBottom:28 }}>
+        <img src="https://picsum.photos/seed/palash42/320/320" alt="" style={{ width:88,height:88,borderRadius:"50%",objectFit:"cover",border:"2px solid var(--border)",display:"block" }} />
       </div>
-      <p className="me-intro">
-        palash — i write code, think about ml, poke at databases,<br />
-        and occasionally go down rabbit holes that have nothing to do with anything useful.
-      </p>
-      <div className="me-tags">
-        {["machine learning","databases","research","code","random deepdives"].map(t => (
-          <span key={t} className="me-tag">{t}</span>
-        ))}
-      </div>
+      <p className="me-intro">palash — i write code, think about ml, poke at databases,<br />and occasionally go down rabbit holes that have nothing to do with anything useful.</p>
+      <div className="me-tags">{["machine learning","databases","research","code","random deepdives"].map(t => <span key={t} className="me-tag">{t}</span>)}</div>
       <div className="me-links">
-        <a className="me-link" href="https://github.com/palashburi" target="_blank" rel="noreferrer">
-          <span style={{ color: "var(--ink-faint)", fontSize: 10 }}>↗</span> github.com/palashburi
-        </a>
-        <a className="me-link" href="https://www.linkedin.com/in/palash-malu-0a4840229/" target="_blank" rel="noreferrer">
-          <span style={{ color: "var(--ink-faint)", fontSize: 10 }}>↗</span> linkedin / palash-malu
-        </a>
+        <a className="me-link" href="https://github.com/palashburi" target="_blank" rel="noreferrer"><span style={{ color:"var(--ink-faint)",fontSize:10 }}>↗</span> github.com/palashburi</a>
+        <a className="me-link" href="https://www.linkedin.com/in/palash-malu-0a4840229/" target="_blank" rel="noreferrer"><span style={{ color:"var(--ink-faint)",fontSize:10 }}>↗</span> linkedin / palash-malu</a>
       </div>
     </div>
   );
@@ -606,72 +518,63 @@ function MeSection() {
 
 // ── ProjSection ───────────────────────────────────────────────────────────────
 function ProjSection({ canEdit }) {
-  const [projs, setProjs]   = useState(() => load(SK_PROJS, defaultProjs));
+  const [projs, setProjs] = useState(() => load(SK_PROJS, defaultProjs));
   const [activeTags, setAT] = useState(new Set());
   const [adding, setAdding] = useState(false);
-  const [form, setForm]     = useState({ name: "", desc: "", stack: "", status: "wip", link: "" });
+  const [form, setForm] = useState({ name:"",desc:"",stack:[],status:"wip",link:"" });
 
   const persist = p => { setProjs(p); save(SK_PROJS, p); };
   const ALL_TAGS = [...new Set(projs.flatMap(p => p.stack))].sort();
-  const toggle   = tag => setAT(prev => { const n = new Set(prev); n.has(tag) ? n.delete(tag) : n.add(tag); return n; });
+  const toggle = tag => setAT(prev => { const n = new Set(prev); n.has(tag) ? n.delete(tag) : n.add(tag); return n; });
   const filtered = activeTags.size === 0 ? projs : projs.filter(p => [...activeTags].every(t => p.stack.includes(t)));
 
   const addProj = () => {
     if (!form.name.trim()) return;
-    const p = { id: Date.now(), name: form.name.trim(), desc: form.desc.trim(), stack: form.stack.split(",").map(s => s.trim()).filter(Boolean), status: form.status, link: form.link.trim() };
-    persist([...projs, p]); setForm({ name: "", desc: "", stack: "", status: "wip", link: "" }); setAdding(false);
+    const p = { id:Date.now(),name:form.name.trim(),desc:form.desc.trim(),stack:form.stack,status:form.status,link:form.link.trim() };
+    persist([...projs,p]); setForm({ name:"",desc:"",stack:[],status:"wip",link:"" }); setAdding(false);
   };
 
   return (
     <div>
       <div className="section-label">03 / work</div>
-      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 28 }}>
-        <div className="section-title" style={{ marginBottom: 0 }}>proj</div>
-        {canEdit && <button className="proj-add-btn" onClick={() => setAdding(a => !a)}>{adding ? "cancel" : "+ add"}</button>}
+      <div style={{ display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:28 }}>
+        <div className="section-title" style={{ marginBottom:0 }}>proj</div>
+        {canEdit && <button className="proj-add-btn" onClick={() => setAdding(a=>!a)}>{adding?"cancel":"+ add"}</button>}
       </div>
-
       {canEdit && adding && (
         <div className="proj-editor-box">
-          <div><div className="ed-label">name</div><input className="ed-input" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="project-name" /></div>
-          <div><div className="ed-label">description</div><input className="ed-input" value={form.desc} onChange={e => setForm(f => ({ ...f, desc: e.target.value }))} placeholder="one line" /></div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-            <div><div className="ed-label">tags (comma separated)</div><input className="ed-input" value={form.stack} onChange={e => setForm(f => ({ ...f, stack: e.target.value }))} placeholder="go, sqlite, react" /></div>
-            <div><div className="ed-label">status</div><select className="ed-input" value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}><option value="wip">wip</option><option value="live">live</option></select></div>
+          <div><div className="ed-label">name</div><input className="ed-input" value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} placeholder="project-name" /></div>
+          <div><div className="ed-label">description</div><input className="ed-input" value={form.desc} onChange={e=>setForm(f=>({...f,desc:e.target.value}))} placeholder="one line" /></div>
+          <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:10 }}>
+            <div><div className="ed-label">tags (press enter)</div><TagInput tags={form.stack} onChange={stack=>setForm(f=>({...f,stack}))} placeholder="go, react…" /></div>
+            <div><div className="ed-label">status</div><select className="ed-input" value={form.status} onChange={e=>setForm(f=>({...f,status:e.target.value}))}><option value="wip">wip</option><option value="live">live</option></select></div>
           </div>
-          <div><div className="ed-label">link</div><input className="ed-input" value={form.link} onChange={e => setForm(f => ({ ...f, link: e.target.value }))} placeholder="https://github.com/..." /></div>
+          <div><div className="ed-label">link</div><input className="ed-input" value={form.link} onChange={e=>setForm(f=>({...f,link:e.target.value}))} placeholder="https://github.com/..." /></div>
           <div className="ed-actions"><button className="btn-p" onClick={addProj}>add</button></div>
         </div>
       )}
-
       {ALL_TAGS.length > 0 && (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 20 }}>
+        <div style={{ display:"flex",flexWrap:"wrap",gap:5,marginBottom:20 }}>
           {ALL_TAGS.map(tag => {
             const on = activeTags.has(tag);
-            return <button key={tag} onClick={() => toggle(tag)} style={{ fontFamily: "var(--font)", fontSize: 10, padding: "3px 10px", borderRadius: 2, border: `1px solid ${on ? "var(--accent)" : "var(--border)"}`, background: on ? "rgba(92,122,110,0.1)" : "transparent", color: on ? "var(--accent)" : "var(--ink-faint)", cursor: "pointer" }}>{tag}</button>;
+            return <button key={tag} onClick={() => toggle(tag)} style={{ fontFamily:"var(--font)",fontSize:10,padding:"3px 10px",borderRadius:2,border:`1px solid ${on?"var(--accent)":"var(--border)"}`,background:on?"rgba(45,107,228,0.08)":"transparent",color:on?"var(--accent)":"var(--ink-faint)",cursor:"pointer" }}>{tag}</button>;
           })}
-          {activeTags.size > 0 && <button onClick={() => setAT(new Set())} style={{ fontFamily: "var(--font)", fontSize: 10, padding: "3px 10px", border: "none", background: "transparent", color: "var(--ink-faint)", cursor: "pointer", textDecoration: "underline" }}>clear</button>}
+          {activeTags.size>0 && <button onClick={()=>setAT(new Set())} style={{ fontFamily:"var(--font)",fontSize:10,padding:"3px 10px",border:"none",background:"transparent",color:"var(--ink-faint)",cursor:"pointer",textDecoration:"underline" }}>clear</button>}
         </div>
       )}
-
       <div>
         {filtered.map(p => (
           <div key={p.id} className="proj-card">
             <div>
-              <div className="proj-row">
-                <span className="proj-slash">/</span>
-                <div className="proj-name">{p.link ? <a href={p.link} target="_blank" rel="noreferrer">{p.name} ↗</a> : p.name}</div>
-              </div>
+              <div className="proj-row"><span className="proj-slash">/</span><div className="proj-name">{p.link?<a href={p.link} target="_blank" rel="noreferrer">{p.name} ↗</a>:p.name}</div></div>
               <div className="proj-desc">{p.desc}</div>
               <div className="proj-stack">
-                {p.stack.map(s => {
-                  const on = activeTags.has(s);
-                  return <span key={s} className="proj-chip" onClick={() => toggle(s)} style={{ background: on ? "rgba(92,122,110,0.12)" : "var(--bg2)", color: on ? "var(--accent)" : "var(--ink-faint)", border: on ? "1px solid var(--accent)" : "1px solid transparent" }}>{s}</span>;
-                })}
+                {p.stack.map(s => { const on=activeTags.has(s); return <span key={s} className="proj-chip" onClick={()=>toggle(s)} style={{ background:on?"rgba(45,107,228,0.1)":"var(--bg2)",color:on?"var(--accent)":"var(--ink-faint)",border:on?"1px solid var(--accent)":"1px solid transparent" }}>{s}</span>; })}
               </div>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
-              {p.status === "live" ? <div className="proj-status">● live</div> : <div className="proj-wip">◌ wip</div>}
-              {canEdit && <button onClick={() => persist(projs.filter(x => x.id !== p.id))} style={{ fontFamily: "var(--font)", fontSize: 10, color: "var(--ink-faint)", background: "transparent", border: "none", cursor: "pointer", padding: 0 }}>remove</button>}
+            <div style={{ display:"flex",flexDirection:"column",alignItems:"flex-end",gap:8 }}>
+              {p.status==="live"?<div className="proj-status">● live</div>:<div className="proj-wip">◌ wip</div>}
+              {canEdit && <button onClick={()=>persist(projs.filter(x=>x.id!==p.id))} style={{ fontFamily:"var(--font)",fontSize:10,color:"var(--ink-faint)",background:"transparent",border:"none",cursor:"pointer",padding:0 }}>remove</button>}
             </div>
           </div>
         ))}
@@ -680,189 +583,179 @@ function ProjSection({ canEdit }) {
   );
 }
 
-// ── GameSection ───────────────────────────────────────────────────────────────
+// ── GameSection — Simon Says ──────────────────────────────────────────────────
+const BTNS = [
+  { id:0, label:"A", color:"#2d6be4", glow:"rgba(45,107,228,0.45)" },
+  { id:1, label:"B", color:"#16b89a", glow:"rgba(22,184,154,0.45)" },
+  { id:2, label:"C", color:"#e4832d", glow:"rgba(228,131,45,0.45)" },
+  { id:3, label:"D", color:"#a050c8", glow:"rgba(160,80,200,0.45)" },
+];
+
 function GameSection() {
   const [screen, setScreen]     = useState("start");
-  const [target, setTarget]     = useState("");
-  const [typed, setTyped]       = useState("");
-  const [streak, setStreak]     = useState(0);
+  const [seq, setSeq]           = useState([]);
+  const [playerSeq, setPS]      = useState([]);
+  const [activeBtn, setActiveBtn] = useState(null);
+  const [level, setLevel]       = useState(0);
   const [best, setBest]         = useState(0);
-  const [score, setScore]       = useState(0);
-  const [timeLeft, setTime]     = useState(45);
-  const [feedback, setFeedback] = useState(null);
-  const [wpm, setWpm]           = useState(0);
-  const [wc, setWc]             = useState(0);
-  const [t0, setT0]             = useState(null);
-  const inputRef = useRef(null);
-  const timerRef = useRef(null);
-  const feedRef  = useRef(null);
+  const [isShowing, setShowing] = useState(false);
+  const [wrongId, setWrongId]   = useState(null);
+  const tosRef                  = useRef([]);
 
-  const next  = useCallback(s => { setTarget(pickWord(s)); setTyped(""); }, []);
-  const flash = useCallback(type => { if (feedRef.current) clearTimeout(feedRef.current); setFeedback(type); feedRef.current = setTimeout(() => setFeedback(null), 350); }, []);
-
-  const start = useCallback(() => {
-    setScore(0); setStreak(0); setBest(0); setTime(45);
-    setTyped(""); setFeedback(null); setWc(0); setWpm(0);
-    setTarget(pickWord(0)); setScreen("playing"); setT0(Date.now());
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => setTime(t => { if (t <= 1) { clearInterval(timerRef.current); setScreen("end"); return 0; } return t - 1; }), 1000);
-    setTimeout(() => inputRef.current && inputRef.current.focus(), 50);
+  const clrTOs = () => { tosRef.current.forEach(clearTimeout); tosRef.current=[]; };
+  const sleep = ms => new Promise(res => { const t=setTimeout(res,ms); tosRef.current.push(t); });
+  const flash = useCallback(async (id, ms=520) => {
+    setActiveBtn(id);
+    await sleep(ms);
+    setActiveBtn(null);
+    await sleep(200);
   }, []);
 
-  const handleInput = useCallback(e => {
-    const val = e.target.value;
-    if (val.endsWith(" ") || val.endsWith("\n")) {
-      const attempt = val.trim();
-      if (attempt === target) {
-        const ns = streak + 1; const pts = ns >= 10 ? 3 : ns >= 5 ? 2 : 1;
-        setScore(s => s + pts); setStreak(ns); setBest(b => Math.max(b, ns));
-        setWc(w => { const nw = w + 1; setWpm(Math.round(nw / ((Date.now() - t0) / 60000))); return nw; });
-        flash("hit"); next(ns);
-      } else { setStreak(0); flash("miss"); setTyped(""); }
+  const playSeq = useCallback(async (s) => {
+    setShowing(true); setPS([]);
+    await sleep(600);
+    for (const id of s) { await flash(id); }
+    setShowing(false);
+  }, [flash]);
+
+  const start = useCallback(async () => {
+    clrTOs();
+    const first = [Math.floor(Math.random()*4)];
+    setSeq(first); setPS([]); setLevel(1); setScreen("playing"); setWrongId(null);
+    await playSeq(first);
+  }, [playSeq]);
+
+  const press = useCallback(async (id) => {
+    if (isShowing || screen !== "playing") return;
+    setActiveBtn(id); await sleep(200); setActiveBtn(null);
+    const newPS = [...playerSeq, id];
+    const idx = newPS.length - 1;
+    if (newPS[idx] !== seq[idx]) {
+      setWrongId(id); setShowing(true);
+      setBest(b => Math.max(b, level-1));
+      setTimeout(() => { setScreen("end"); setShowing(false); clrTOs(); }, 700);
       return;
     }
-    setTyped(val);
-  }, [target, streak, t0, flash, next]);
+    setPS(newPS);
+    if (newPS.length === seq.length) {
+      setShowing(true);
+      const next = [...seq, Math.floor(Math.random()*4)];
+      setSeq(next); setLevel(l=>l+1); setPS([]);
+      await sleep(500);
+      await playSeq(next);
+    }
+  }, [isShowing, screen, playerSeq, seq, level, playSeq]);
 
-  useEffect(() => () => { clearInterval(timerRef.current); clearTimeout(feedRef.current); }, []);
+  useEffect(() => () => clrTOs(), []);
 
-  const sc = streak >= 10 ? "var(--accent2)" : streak >= 5 ? "var(--accent)" : "var(--ink-faint)";
-  const renderTarget = () => target.split("").map((ch, i) => {
-    let c = "var(--ink-faint)";
-    if (i < typed.length) c = typed[i] === ch ? "var(--accent)" : "#b05c3a";
-    else if (i === typed.length) c = "var(--ink)";
-    return <span key={i} style={{ color: c, transition: "color 0.08s" }}>{ch}</span>;
-  });
+  const progress = seq.length ? (playerSeq.length / seq.length) * 100 : 0;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+    <div style={{ display:"flex",flexDirection:"column",gap:20 }}>
       <div className="section-label">04 / distraction</div>
       <div className="section-title">game_to_waste_time</div>
 
       {screen === "start" && (
-        <div style={{ maxWidth: 460 }}>
-          <p style={{ fontSize: 13, color: "var(--ink-mid)", lineHeight: 1.9, marginBottom: 24 }}>
-            words appear. type and hit space. streak builds multiplier.<br />
-            harder words unlock as you go. 45 seconds.
-          </p>
+        <div style={{ maxWidth:400 }}>
+          <p style={{ fontSize:13,color:"var(--ink-mid)",lineHeight:1.9,marginBottom:6 }}><b style={{ color:"var(--ink)" }}>simon says.</b> watch the sequence light up.</p>
+          <p style={{ fontSize:13,color:"var(--ink-mid)",lineHeight:1.9,marginBottom:24 }}>repeat it back in order. each round adds one step. how deep can you go?</p>
           <button className="game-btn" onClick={start}>start</button>
         </div>
       )}
 
-      {screen === "playing" && (
-        <div style={{ display: "flex", flexDirection: "column", gap: 18, maxWidth: 500 }}>
-          <div style={{ display: "flex", gap: 20, fontSize: 11, color: "var(--ink-faint)" }}>
-            <span>time <b style={{ color: timeLeft <= 10 ? "#b05c3a" : "var(--ink)" }}>{timeLeft}s</b></span>
-            <span>score <b style={{ color: "var(--ink)" }}>{score}</b></span>
-            <span>streak <b style={{ color: sc }}>{streak}</b></span>
-            <span>wpm <b style={{ color: "var(--ink)" }}>{wpm}</b></span>
+      {(screen==="playing"||screen==="end") && (
+        <div style={{ display:"flex",flexDirection:"column",gap:16,maxWidth:320 }}>
+          <div style={{ display:"flex",gap:20,fontSize:11,color:"var(--ink-faint)" }}>
+            <span>level <b style={{ color:"var(--ink)",fontSize:14 }}>{level}</b></span>
+            <span>best <b style={{ color:"var(--ink)" }}>{best}</b></span>
+            {screen==="playing" && <span style={{ color:isShowing?"var(--accent)":"var(--ink-faint)" }}>{isShowing?"watch…":"your turn"}</span>}
           </div>
-          <div style={{ background: "var(--bg2)", border: `1px solid ${feedback === "hit" ? "var(--accent)" : feedback === "miss" ? "#b05c3a" : "var(--border)"}`, borderRadius: 3, padding: "28px 32px", transition: "border-color 0.15s" }}>
-            <div style={{ fontSize: 30, letterSpacing: "0.06em", marginBottom: 20, lineHeight: 1 }}>{renderTarget()}</div>
-            <input ref={inputRef} value={typed} onChange={handleInput} spellCheck={false} autoComplete="off" autoCorrect="off" autoCapitalize="off"
-              style={{ fontFamily: "var(--font)", fontSize: 16, color: "var(--ink)", background: "transparent", border: "none", borderBottom: "1px solid var(--border)", outline: "none", width: "100%", padding: "3px 0", caretColor: "var(--accent)" }}
-              placeholder="type · space to submit" />
-          </div>
-          {streak >= 3 && <div style={{ fontSize: 11, color: sc }}>{streak >= 10 ? "on fire" : "streak ×" + streak}</div>}
-        </div>
-      )}
 
-      {screen === "end" && (
-        <div style={{ maxWidth: 380 }}>
-          <div style={{ fontSize: 22, fontWeight: 700, color: "var(--ink)", marginBottom: 18 }}>{score} pts</div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 7, fontSize: 12, color: "var(--ink-mid)", marginBottom: 24 }}>
-            <span>words typed · <b style={{ color: "var(--ink)" }}>{wc}</b></span>
-            <span>best streak · <b style={{ color: "var(--ink)" }}>{best}</b></span>
-            <span>avg wpm · <b style={{ color: "var(--ink)" }}>{wpm}</b></span>
+          {screen==="playing" && !isShowing && (
+            <div style={{ height:2,background:"var(--border)",borderRadius:1,overflow:"hidden" }}>
+              <div style={{ height:"100%",width:`${progress}%`,background:"var(--accent)",transition:"width 0.2s",borderRadius:1 }} />
+            </div>
+          )}
+
+          <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:8 }}>
+            {BTNS.map(b => {
+              const on = activeBtn===b.id;
+              const wrong = wrongId===b.id;
+              return (
+                <button key={b.id} onClick={() => press(b.id)} disabled={isShowing}
+                  style={{
+                    height:90, borderRadius:4, border:`2px solid ${on?b.color:"var(--border)"}`,
+                    background: wrong?"#d94040" : on ? b.color : "var(--bg2)",
+                    cursor: isShowing?"default":"pointer",
+                    transition:"all 0.12s",
+                    fontFamily:"var(--font)",fontSize:10,fontWeight:700,
+                    color: on?"#fff":"var(--ink-faint)",
+                    letterSpacing:"0.1em",
+                    boxShadow: on ? `0 0 22px ${b.glow}` : "none",
+                    transform: on ? "scale(1.04)" : "scale(1)",
+                  }}>{b.label}</button>
+              );
+            })}
           </div>
-          <div style={{ fontSize: 13, fontStyle: "italic", color: "var(--ink-faint)", marginBottom: 22 }}>
-            {wpm >= 60 ? "fast hands." : wpm >= 40 ? "solid rhythm." : "keep going."}
-          </div>
-          <button className="game-btn" onClick={start}>again</button>
+
+          {screen==="end" && (
+            <div style={{ paddingTop:4 }}>
+              <div style={{ fontSize:20,fontWeight:700,color:"var(--ink)",marginBottom:6 }}>{level-1===0?"first try.":`level ${level-1}`}</div>
+              <div style={{ fontSize:12,color:"var(--ink-faint)",marginBottom:18,fontStyle:"italic" }}>
+                {level-1>=10?"impressive memory.":level-1>=5?"solid.":"it gets addictive."}
+              </div>
+              <button className="game-btn" onClick={start}>again</button>
+            </div>
+          )}
         </div>
       )}
     </div>
   );
 }
 
-// ── Tweaks (inlined) ──────────────────────────────────────────────────────────
+// ── TweaksPanel ───────────────────────────────────────────────────────────────
 function TweaksPanel({ open, onClose, tweaks, setTweak }) {
-  const dragRef   = useRef(null);
-  const offsetRef = useRef({ x: 16, y: 16 });
+  const dragRef = useRef(null);
+  const offRef = useRef({ x:16,y:16 });
   const PAD = 16;
-
   const clamp = useCallback(() => {
-    const panel = dragRef.current;
-    if (!panel) return;
-    const w = panel.offsetWidth, h = panel.offsetHeight;
-    offsetRef.current = {
-      x: Math.min(Math.max(PAD, window.innerWidth - w - PAD),  Math.max(PAD, offsetRef.current.x)),
-      y: Math.min(Math.max(PAD, window.innerHeight - h - PAD), Math.max(PAD, offsetRef.current.y)),
-    };
-    panel.style.right  = offsetRef.current.x + "px";
-    panel.style.bottom = offsetRef.current.y + "px";
-  }, []);
-
+    const p=dragRef.current; if(!p) return;
+    const w=p.offsetWidth, h=p.offsetHeight;
+    offRef.current={ x:Math.min(Math.max(PAD,window.innerWidth-w-PAD),Math.max(PAD,offRef.current.x)), y:Math.min(Math.max(PAD,window.innerHeight-h-PAD),Math.max(PAD,offRef.current.y)) };
+    p.style.right=offRef.current.x+"px"; p.style.bottom=offRef.current.y+"px";
+  },[]);
   useEffect(() => {
-    if (!open) return;
-    clamp();
-    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(clamp) : null;
-    if (ro) ro.observe(document.documentElement);
-    else window.addEventListener("resize", clamp);
-    return () => { if (ro) ro.disconnect(); else window.removeEventListener("resize", clamp); };
-  }, [open, clamp]);
-
+    if(!open) return; clamp();
+    const ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(clamp):null;
+    if(ro) ro.observe(document.documentElement); else window.addEventListener("resize",clamp);
+    return () => { if(ro) ro.disconnect(); else window.removeEventListener("resize",clamp); };
+  },[open,clamp]);
   const onDragStart = e => {
-    const panel = dragRef.current;
-    if (!panel) return;
-    const r = panel.getBoundingClientRect();
-    const sx = e.clientX, sy = e.clientY;
-    const startRight  = window.innerWidth  - r.right;
-    const startBottom = window.innerHeight - r.bottom;
-    const move = ev => {
-      offsetRef.current = { x: startRight - (ev.clientX - sx), y: startBottom - (ev.clientY - sy) };
-      clamp();
-    };
-    const up = () => { window.removeEventListener("mousemove", move); window.removeEventListener("mouseup", up); };
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", up);
+    const p=dragRef.current; if(!p) return;
+    const r=p.getBoundingClientRect(), sx=e.clientX, sy=e.clientY;
+    const sr=window.innerWidth-r.right, sb=window.innerHeight-r.bottom;
+    const move=ev=>{ offRef.current={x:sr-(ev.clientX-sx),y:sb-(ev.clientY-sy)}; clamp(); };
+    const up=()=>{ window.removeEventListener("mousemove",move); window.removeEventListener("mouseup",up); };
+    window.addEventListener("mousemove",move); window.addEventListener("mouseup",up);
   };
-
-  if (!open || !tweaks) return null;
+  if(!open||!tweaks) return null;
   return (
-    <div ref={dragRef} className="twk-panel" style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
-      <div className="twk-hd" onMouseDown={onDragStart}>
-        <b>Tweaks</b>
-        <button className="twk-x" onClick={onClose}>✕</button>
-      </div>
+    <div ref={dragRef} className="twk-panel" style={{ right:offRef.current.x,bottom:offRef.current.y }}>
+      <div className="twk-hd" onMouseDown={onDragStart}><b>Tweaks</b><button className="twk-x" onClick={onClose}>✕</button></div>
       <div className="twk-body">
         <div className="twk-sect">Theme</div>
-        {/* dark toggle */}
         <div className="twk-row twk-row-h">
           <div className="twk-lbl"><span>Dark mode</span></div>
-          <button type="button" className="twk-toggle" data-on={tweaks.dark ? "1" : "0"} onClick={() => setTweak("dark", !tweaks.dark)}><i /></button>
+          <button type="button" className="twk-toggle" data-on={tweaks.dark?"1":"0"} onClick={()=>setTweak("dark",!tweaks.dark)}><i /></button>
         </div>
-        {/* bg tone (light only) */}
-        {!tweaks.dark && (
-          <div className="twk-row">
-            <div className="twk-lbl"><span>BG tone</span></div>
-            <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
-              {["warm","cool","grey"].map(t => (
-                <button key={t} onClick={() => setTweak("bgTone", t)} style={{ fontFamily: "var(--font)", fontSize: 10, padding: "3px 10px", borderRadius: 2, border: `1px solid ${tweaks.bgTone === t ? "var(--accent)" : "var(--border)"}`, background: tweaks.bgTone === t ? "rgba(92,122,110,0.1)" : "transparent", color: tweaks.bgTone === t ? "var(--accent)" : "var(--ink-faint)", cursor: "pointer" }}>{t}</button>
-              ))}
-            </div>
-          </div>
-        )}
-        {/* accent color */}
         <div className="twk-row twk-row-h">
           <div className="twk-lbl"><span>Accent</span></div>
-          <input type="color" className="twk-swatch" value={tweaks.accent} onChange={e => setTweak("accent", e.target.value)} />
+          <input type="color" className="twk-swatch" value={tweaks.accent} onChange={e=>setTweak("accent",e.target.value)} />
         </div>
-        <div className="twk-sect" style={{ paddingTop: 8 }}>Type</div>
-        {/* font size */}
+        <div className="twk-sect" style={{ paddingTop:8 }}>Type</div>
         <div className="twk-row">
           <div className="twk-lbl"><span>Font size</span><span className="twk-val">{tweaks.fontSize}px</span></div>
-          <input type="range" className="twk-slider" min={12} max={20} step={1} value={tweaks.fontSize} onChange={e => setTweak("fontSize", Number(e.target.value))} />
+          <input type="range" className="twk-slider" min={12} max={20} step={1} value={tweaks.fontSize} onChange={e=>setTweak("fontSize",Number(e.target.value))} />
         </div>
       </div>
     </div>
@@ -872,10 +765,7 @@ function TweaksPanel({ open, onClose, tweaks, setTweak }) {
 // ── Sticker ───────────────────────────────────────────────────────────────────
 function Sticker({ onClick }) {
   return (
-    <svg width="34" height="34" viewBox="0 0 44 44" fill="none"
-      onClick={onClick}
-      title="double-click to unlock editing"
-      style={{ opacity: 0.65, cursor: "default", flexShrink: 0 }}>
+    <svg width="34" height="34" viewBox="0 0 44 44" fill="none" onClick={onClick} title="double-click to unlock editing" style={{ opacity:0.65,cursor:"default",flexShrink:0 }}>
       <circle cx="22" cy="22" r="20" fill="var(--bg2)" stroke="var(--border)" strokeWidth="1.2"/>
       <circle cx="22" cy="22" r="16" fill="none" stroke="var(--ink-faint)" strokeWidth="0.6" strokeDasharray="2.5 2"/>
       <rect x="13" y="18" width="14" height="10" rx="1.5" fill="none" stroke="var(--ink-mid)" strokeWidth="1.3"/>
@@ -890,13 +780,23 @@ function Sticker({ onClick }) {
 
 // ── App ───────────────────────────────────────────────────────────────────────
 const SECTIONS = [
-  { id: "my_notes",           label: "my_notes" },
-  { id: "me",                 label: "me" },
-  { id: "proj",               label: "proj" },
-  { id: "game_to_waste_time", label: "game_to_waste_time" },
+  { id:"my_notes",           label:"my_notes" },
+  { id:"me",                 label:"me" },
+  { id:"proj",               label:"proj" },
+  { id:"game_to_waste_time", label:"game_to_waste_time" },
 ];
 
-const DEFAULT_TWEAKS = { accent: "#5c7a6e", bgTone: "warm", fontSize: 14, dark: false };
+const DEFAULT_TWEAKS = { accent:"#2d6be4", fontSize:14, dark:false };
+
+function shadeColor(hex, pct) {
+  try {
+    const num = parseInt(hex.replace("#",""),16);
+    const r=Math.min(255,Math.max(0,(num>>16)+pct));
+    const g=Math.min(255,Math.max(0,((num>>8)&0xFF)+pct));
+    const b=Math.min(255,Math.max(0,(num&0xFF)+pct));
+    return "#"+[r,g,b].map(v=>v.toString(16).padStart(2,"0")).join("");
+  } catch { return hex; }
+}
 
 function App() {
   const [active, setActive]     = useState("my_notes");
@@ -906,30 +806,23 @@ function App() {
   const [authModal, setAuthMod] = useState(false);
   const [pwInput, setPwInput]   = useState("");
   const [pwError, setPwErr]     = useState(false);
-  const stickerClickRef         = useRef({ count: 0, timer: null });
+  const stickerRef              = useRef({ count:0, timer:null });
 
   const setTweak = useCallback((key, val) => {
-    setTweaksRaw(prev => {
-      const next = { ...prev, [key]: val };
-      save(SK_TWEAKS, next);
-      return next;
-    });
+    setTweaksRaw(prev => { const next={...prev,[key]:val}; save(SK_TWEAKS,next); return next; });
   }, []);
 
-  // Apply CSS vars on tweak change
   useEffect(() => {
     if (!tweaks) return;
     const r = document.documentElement;
-    r.style.setProperty("--accent", tweaks.dark ? "#5c9abf" : tweaks.accent);
+    const acc = tweaks.dark ? "#4480e0" : tweaks.accent;
+    r.style.setProperty("--accent",  acc);
+    r.style.setProperty("--accent2", tweaks.dark ? "#264fa0" : shadeColor(tweaks.accent,-20));
     document.body.style.fontSize = tweaks.fontSize + "px";
     tweaks.dark ? document.body.classList.add("dark-mode") : document.body.classList.remove("dark-mode");
-    const bgMap = {
-      warm: { bg: "#f7f4f0", bg2: "#efebe4", border: "#ddd8cf", ink: "#1e1c19", mid: "#5c5649", faint: "#a89f93" },
-      cool: { bg: "#f0f3f5", bg2: "#e5eaee", border: "#cdd4da", ink: "#181e24", mid: "#4e5a65", faint: "#96a3ae" },
-      grey: { bg: "#f4f4f3", bg2: "#eceae8", border: "#d6d3cf", ink: "#181614", mid: "#555250", faint: "#a09d9a" },
-      dark: { bg: "#0b0d12", bg2: "#111520", border: "#1e2535", ink: "#dde6f0", mid: "#7a9ab5", faint: "#2e3d52" },
-    };
-    const t = tweaks.dark ? bgMap.dark : (bgMap[tweaks.bgTone] || bgMap.warm);
+    const t = tweaks.dark
+      ? { bg:"#070b14",bg2:"#0c1220",border:"#111928",ink:"#d8e8ff",mid:"#3d5880",faint:"#1c2e48" }
+      : { bg:"#f2f4f7",bg2:"#e8ecf2",border:"#d0d8e8",ink:"#0f1624",mid:"#3d4e63",faint:"#8a9ab5" };
     r.style.setProperty("--bg",        t.bg);
     r.style.setProperty("--bg2",       t.bg2);
     r.style.setProperty("--border",    t.border);
@@ -938,91 +831,63 @@ function App() {
     r.style.setProperty("--ink-faint", t.faint);
   }, [tweaks]);
 
-  // Double-click sticker to open auth modal
   const onStickerClick = () => {
-    if (canEdit) { setShowTw(v => !v); return; }
-    const ref = stickerClickRef.current;
-    ref.count += 1;
-    if (ref.timer) clearTimeout(ref.timer);
-    if (ref.count >= 2) {
-      ref.count = 0;
-      setAuthMod(true);
-      setPwInput("");
-      setPwErr(false);
-    } else {
-      ref.timer = setTimeout(() => { ref.count = 0; }, 500);
-    }
+    if (canEdit) { setShowTw(v=>!v); return; }
+    const ref=stickerRef.current; ref.count+=1;
+    if(ref.timer) clearTimeout(ref.timer);
+    if(ref.count>=2) { ref.count=0; setAuthMod(true); setPwInput(""); setPwErr(false); }
+    else { ref.timer=setTimeout(()=>{ ref.count=0; },500); }
   };
 
   const tryUnlock = () => {
-    if (pwInput === EDITOR_PASSWORD) {
-      unlockEdit();
-      setCanEdit(true);
-      setAuthMod(false);
-    } else {
-      setPwErr(true);
-      setPwInput("");
-    }
+    if(pwInput===EDITOR_PASSWORD) { unlockEdit(); setCanEdit(true); setAuthMod(false); }
+    else { setPwErr(true); setPwInput(""); }
   };
 
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-      {/* ── Top bar ── */}
+    <div style={{ height:"100%",display:"flex",flexDirection:"column" }}>
       <header className="topbar">
         <span className="topbar-logo">palash<span>.</span></span>
         {SECTIONS.map(s => (
           <React.Fragment key={s.id}>
             <span className="topbar-slash">/</span>
-            <span className={`nav-link${active === s.id ? " active" : ""}`} onClick={() => setActive(s.id)}>{s.label}</span>
+            <span className={`nav-link${active===s.id?" active":""}`} onClick={()=>setActive(s.id)}>{s.label}</span>
           </React.Fragment>
         ))}
-        <span style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 12 }}>
-          <button
-            onClick={() => setTweak("dark", !tweaks.dark)}
-            title={tweaks.dark ? "light mode" : "dark mode"}
-            style={{ background: "transparent", border: "none", cursor: "pointer", color: tweaks.dark ? "#5c9abf" : "var(--ink-faint)", fontSize: 14, padding: 0, lineHeight: 1, opacity: 0.9 }}>
-            {tweaks.dark ? "◐" : "○"}
+        <span style={{ marginLeft:"auto",display:"flex",alignItems:"center",gap:12 }}>
+          <button onClick={()=>setTweak("dark",!tweaks.dark)} title={tweaks.dark?"light mode":"dark mode"}
+            style={{ background:"transparent",border:"none",cursor:"pointer",color:tweaks.dark?"#4480e0":"var(--ink-faint)",fontSize:14,padding:0,lineHeight:1,opacity:0.9 }}>
+            {tweaks.dark?"◐":"○"}
           </button>
           <Sticker onClick={onStickerClick} />
         </span>
       </header>
 
-      {/* ── Content ── */}
-      <main className="content">
-        {active === "my_notes"           && <NotesSection canEdit={canEdit} />}
-        {active === "me"                 && <MeSection />}
-        {active === "proj"               && <ProjSection canEdit={canEdit} />}
-        {active === "game_to_waste_time" && <GameSection />}
-      </main>
+      <div className="content-wrapper">
+        <main className="content">
+          {active==="my_notes"           && <NotesSection canEdit={canEdit} />}
+          {active==="me"                 && <MeSection />}
+          {active==="proj"               && <ProjSection canEdit={canEdit} />}
+          {active==="game_to_waste_time" && <GameSection />}
+        </main>
+      </div>
 
-      {/* ── Tweaks panel ── */}
-      <TweaksPanel open={showTweaks} onClose={() => setShowTw(false)} tweaks={tweaks} setTweak={setTweak} />
+      <TweaksPanel open={showTweaks} onClose={()=>setShowTw(false)} tweaks={tweaks} setTweak={setTweak} />
+      {canEdit && <div className="edit-badge">edit mode</div>}
 
-      {/* ── Edit unlocked badge ── */}
-      {canEdit && (
-        <div className="edit-badge">edit mode</div>
-      )}
-
-      {/* ── Auth modal ── */}
       {authModal && (
-        <div style={{ position: "fixed", inset: 0, background: "rgba(30,28,25,0.5)", zIndex: 300, display: "flex", alignItems: "center", justifyContent: "center" }}
-          onClick={e => { if (e.target === e.currentTarget) setAuthMod(false); }}>
-          <div style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 4, padding: "32px 36px", width: 320, display: "flex", flexDirection: "column", gap: 14 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "var(--ink)" }}>unlock editing</div>
-            <input
-              autoFocus
-              type="password"
-              className="ed-input"
-              value={pwInput}
-              placeholder="password"
-              onChange={e => { setPwInput(e.target.value); setPwErr(false); }}
-              onKeyDown={e => { if (e.key === "Enter") tryUnlock(); if (e.key === "Escape") setAuthMod(false); }}
-              style={{ borderColor: pwError ? "#b05c3a" : undefined }}
-            />
-            {pwError && <div style={{ fontSize: 11, color: "#b05c3a" }}>wrong password</div>}
+        <div style={{ position:"fixed",inset:0,background:"rgba(7,11,20,0.65)",zIndex:300,display:"flex",alignItems:"center",justifyContent:"center" }}
+          onClick={e=>{ if(e.target===e.currentTarget) setAuthMod(false); }}>
+          <div style={{ background:"var(--bg)",border:"1px solid var(--border)",borderRadius:4,padding:"32px 36px",width:320,display:"flex",flexDirection:"column",gap:14 }}>
+            <div style={{ fontSize:13,fontWeight:700,color:"var(--ink)" }}>unlock editing</div>
+            <input autoFocus type="password" className="ed-input" value={pwInput} placeholder="password"
+              onChange={e=>{ setPwInput(e.target.value); setPwErr(false); }}
+              onKeyDown={e=>{ if(e.key==="Enter") tryUnlock(); if(e.key==="Escape") setAuthMod(false); }}
+              style={{ borderColor:pwError?"#e04040":undefined }} />
+            {pwError && <div style={{ fontSize:11,color:"#e04040" }}>wrong password</div>}
             <div className="ed-actions">
               <button className="btn-p" onClick={tryUnlock}>unlock</button>
-              <button className="btn-g" onClick={() => setAuthMod(false)}>cancel</button>
+              <button className="btn-g" onClick={()=>setAuthMod(false)}>cancel</button>
             </div>
           </div>
         </div>
